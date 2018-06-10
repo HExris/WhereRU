@@ -1,0 +1,13 @@
+<!--components/Toast/toast.wxml-->
+<cover-view
+  class='toast'
+  style='background-color:{{backgroundColor}};color:{{textColor}};font-size:{{fontSize}};padding:{{padding}};opacity:{{opacity}};bottom:{{bottom}}'
+  wx:if="{{isShow && !emoji}}">
+  <cover-view>{{message}}</cover-view>
+</cover-view>
+<view
+  class='toast'
+  style='background-color:{{backgroundColor}};color:{{textColor}};font-size:{{fontSize}};padding:{{padding}};opacity:{{opacity}};bottom:{{bottom}}'
+  wx:if="{{isShow && emoji}}">
+  <cover-view>{{message}}</cover-view> <text class='iconfont {{emoji}}' style='color:{{emojiColor}}'></text>
+</view>

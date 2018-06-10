@@ -1,0 +1,19 @@
+/* components/Toast/toast.wxss */
+@import '../../lib/iconfont.wxss';
+
+.toast{
+  position: fixed;
+  z-index: 9999!important;
+  bottom: 35vh;
+  left: 50vw;
+  transform: translate(-50%,-50%);
+  border-radius: 12rpx;
+  line-height: 1;
+  transition: 1.5s all ease-out;
+  white-space: nowrap;
+  opacity: 1;
+}
+
+cover-view{
+  display: inline;
+}

@@ -1,0 +1,16 @@
+<!--index.wxml-->
+<view class='container'>
+  <dialog id='dialog' 
+      content='{{question}}' 
+      cancelText='No' 
+      confirmText='Yes'
+      bind:cancelEvent="refuse"
+      bind:confirmEvent=""
+      bind:getUserInfo='getUserInfo'>
+  </dialog>
+  <toast id='toast'
+    message='{{toastMessage}}'
+    emoji='{{emoji}}'
+    emojiColor='{{emojiColor}}'
+    textColor='{{toastTextColor}}'></toast>
+</view>

@@ -1,0 +1,14 @@
+<!--components/question/question.wxml-->
+<view class='dialog_container' hidden="{{!isShow}}">
+    <view class='dialog'>
+        <view class='dialog-content'>{{ content }}</view>
+        <view class='dialog-footer'>
+          <view class='dialog-btn' catchtap='_cancelEvent'>
+            <button>{{ cancelText }}</button>
+          </view>
+          <view class='dialog-btn' catchtap='_confirmEvent'>
+            <button open-type='getUserInfo' bindgetuserinfo='getUserInfo'>{{ confirmText }}</button>
+          </view>
+        </view>
+    </view>
+</view>

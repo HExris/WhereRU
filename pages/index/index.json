@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "WHERE R U ?",
+  "usingComponents": {
+    "dialog": "/components/Dialog/dialog",
+    "toast": "/components/Toast/toast"
+  }
+}

@@ -1,0 +1,31 @@
+<!--pages/map/map.wxml-->
+<map class='map'
+show-location
+latitude="{{latitude}}"
+longitude="{{longitude}}"
+bindupdated='updated'
+scale='{{scale}}'
+id="myMap">
+  <cover-view class='position' bindtap='showAction'>
+    <cover-image src='/resources/img/location.png'></cover-image>
+  </cover-view>
+</map>
+<toast id='toast'
+    message='{{toastMessage}}'
+    cancelText='No' 
+    confirmText='Yes'
+    emoji='{{emoji}}'
+    emojiColor='{{emojiColor}}'
+    bottom='{{bottom}}'
+    textColor='{{toastTextColor}}'></toast>
+
+<cover-view class='btn_group' catchtap='action'>
+  <cover-image mode='widthFix' src='/resources/img/button_group.png'></cover-image>
+  <cover-view class='btn' data-attr='0'></cover-view>
+  <cover-view class='btn' data-attr='1'></cover-view>
+</cover-view>
+
+<!-- 弹窗提示 -->
+<!-- <view class='customize_toast'>
+  <view class=''></view>
+</view> -->
