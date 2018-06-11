@@ -1,6 +1,7 @@
 // components/Dialog/dialog.js
 const app = getApp()
 const core = require('../../utils/core.js')
+const { hostname, baseUrl } = require('../../utils/config.js')
 
 Component({
   options: {
@@ -77,10 +78,20 @@ Component({
       this.triggerEvent("confirmEvent");
     },
     getUserInfo(e) {
-      console.log(e)
       if (e.detail.userInfo){
         app.globalData.userInfo = e.detail.userInfo
         wx.setStorageSync('userInfo', e.detail.userInfo)
+        wx.request({
+          method: 'post',
+          url: baseUrl.login ,
+          data:{
+            code: app.globalData.code,
+            userInfo: app.globalData.userInfo,
+          },
+          success: res => {
+            console.log()
+          }
+        })
         core.triggerFunction('pages/index/index', 'showToast', 'Success')
       }else{
         core.triggerFunction('pages/index/index', 'showToast', 'Reject userinfo')

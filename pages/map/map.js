@@ -1,6 +1,6 @@
 // pages/map/map.js
 const { setDataInOtherPage, getCompoents} = require('../../utils/core.js')
-const { getNetworkStatus } = require('../../utils/util.js')
+const { getNetworkStatus } = require('../../utils/utils.js')
 
 Page({
 

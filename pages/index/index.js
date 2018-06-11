@@ -2,6 +2,7 @@
 //获取应用实例
 const app = getApp()
 var core = require('../../utils/core.js')
+var utils = require('../../utils/utils.js')
 
 Page({
   data: {
@@ -38,11 +39,15 @@ Page({
       })
     } else if (this.data.canIUse) {
       app.userInfoReadyCallback = res => {
+        // 更新用户信息
         this.setData({
           userInfo: res.userInfo,
           hasUserInfo: true
         })
+        wx.setStorageSync('userInfo', userInfo)
+        // 跳转Map页面
         this.doOptions(res)
+        utils.getOpenID()
       }
     } else {
       // 在没有 open-type=getUserInfo 版本的兼容处理

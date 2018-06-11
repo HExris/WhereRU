@@ -1,3 +1,5 @@
+const { baseUrl } = require('../utils/config.js')
+const app = new getApp()
 /**
  * 格式化时间
  * @date date对象
@@ -102,7 +104,10 @@ class CalcMethod {
   }
 }
 
-function getNetworkStatus(){
+/** 
+ * 获取网络状态
+*/
+function getNetworkStatus() {
   return new Promise((resolve, reject) => {
     wx.getNetworkType({
       success: function (res) {
@@ -115,8 +120,31 @@ function getNetworkStatus(){
   })
 }
 
+/** 
+ * 获取openID
+*/
+function getOpenID() {
+  return new Promise((resolve, reject) => {
+    wx.request({
+      method: 'post',
+      url: baseUrl.login,
+      data: {
+        code: app.globalData.code,
+        userInfo: app.globalData.userInfo,
+      },
+      success: res => {
+        resolve(res)
+      },
+      fail: err => {
+        reject(err)
+      }
+    })
+  })
+}
+
 module.exports = {
   formatTime,
   CalcMethod,
   getNetworkStatus,
+  getOpenID,
 }
