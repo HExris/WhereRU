@@ -1,5 +1,6 @@
 // pages/map/map.js
-const core = require('../../utils/core.js')
+const { setDataInOtherPage, getCompoents} = require('../../utils/core.js')
+const { getNetworkStatus } = require('../../utils/util.js')
 
 Page({
 
@@ -17,7 +18,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    core.setDataInOtherPage('pages/map/map',[{test:true}])
+    setDataInOtherPage('pages/map/map', [{ test: true }])
     this.getLocation()
   },
 
@@ -26,7 +27,7 @@ Page({
    */
   onReady: function () {
     let { compents } = this.data
-    core.getCompoents(compents, this)
+    getCompoents(compents, this)
     this.mapCtx = wx.createMapContext('myMap')
   },
 
@@ -83,28 +84,40 @@ Page({
         // })
         this.mapCtx.moveToLocation()
         this.updateLocation(res.latitude, res.longitude)
-        this.updated(()=>{
+        this.updated(() => {
           this.showToast('success')
         })
       },
       fail: res => {
-        console.log(res)
-        wx.showModal({
-          title: 'Failed to locate',
-          content: 'Please open the location service.',
-          confirmText: 'Settings',
-          confirmColor: '#fbab70',
-          cancelText: '取消',
-          showCancel: false,
-          success: res => {
-            if (res.confirm) {
-              wx.openSetting({
-                complete: res => {
-                  this.getLocation()
+        getNetworkStatus().then(res => {
+          if (res.networkType === 'none') {
+            wx.showModal({
+              title: '无网络',
+              content: '请打开数据或连接WiFi',
+              confirmColor: '#fbab70',
+              showCancel: false
+            })
+          }else{
+            wx.showModal({
+              title: 'Failed to locate',
+              content: 'Please open the location service.',
+              confirmText: 'Settings',
+              confirmColor: '#fbab70',
+              cancelText: '取消',
+              showCancel: false,
+              success: res => {
+                if (res.confirm) {
+                  wx.openSetting({
+                    complete: res => {
+                      this.getLocation()
+                    }
+                  })
                 }
-              })
-            }
+              }
+            })
           }
+        }).catch(err => {
+          console.error(err)
         })
       }
     })
@@ -141,23 +154,23 @@ Page({
     this.toast.triggerToast();
   },
 
-  updated(callback){
+  updated(callback) {
     typeof callback === 'function' && callback()
   },
   // 行为控制
-  action(e){
+  action(e) {
     let { attr } = e.target.dataset
     attr = Number(attr)
-    switch (attr){
+    switch (attr) {
       case 0:
         wx.showModal({
           title: '留下足迹？',
           content: '在地图上记录上你当前的位置',
           confirmColor: '#fbab70',
-          success: (res) =>{
-            if(res.confirm){
+          success: (res) => {
+            if (res.confirm) {
               console.log('确定')
-            }else{
+            } else {
               console.log('取消')
             }
           }

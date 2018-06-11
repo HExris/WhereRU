@@ -24,7 +24,7 @@ const formatNumber = n => {
  * @param this.arg2 
  * @returns {Number} 
  */
-export class CalcMethod {
+class CalcMethod {
   constructor(arg1, arg2) {
     this.arg1 = arg1
     this.arg2 = arg2
@@ -102,6 +102,21 @@ export class CalcMethod {
   }
 }
 
+function getNetworkStatus(){
+  return new Promise((resolve, reject) => {
+    wx.getNetworkType({
+      success: function (res) {
+        resolve(res)
+      },
+      fail: function (err) {
+        reject(err)
+      }
+    })
+  })
+}
+
 module.exports = {
-  formatTime: formatTime
+  formatTime,
+  CalcMethod,
+  getNetworkStatus,
 }

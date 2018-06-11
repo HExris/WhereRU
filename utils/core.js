@@ -52,7 +52,6 @@ function getCompoents(compents, self) {
 function setDataInOtherPage(routerName, param) {
   param.forEach((item,index)=>{
     for (let name in item){
-      console.log(getPage(routerName))
       getPage(routerName).data[name] = item[name]
     }
   })
