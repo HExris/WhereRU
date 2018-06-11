@@ -5,7 +5,7 @@ let hostname = ''
 let baseUrl = {}
 
 if (env === 0) {
-  hostname = 'http://localhost:3000'
+  hostname = 'http://192.168.1.100:3000'
   baseUrl = {
     login: '/users/login'
   }

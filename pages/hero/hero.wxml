@@ -1,0 +1,22 @@
+<!--pages/hero/hero.wxml-->
+<image class='fadeIn' src='/resources/img/hero.jpg' mode='widthFix'></image>
+
+<view class='hello fadeInDown'>Hi ~ (=・ω・=)</view>
+
+<view class='loading'>
+  <!-- <text style="font-size: 25px;">Loading</text> -->
+  <view class='loading_box'>
+    <view class="l-1"></view>
+    <view class="l-2"></view>
+    <view class="l-3"></view>
+    <view class="l-4"></view>
+    <view class="l-5"></view>
+  </view>
+</view>
+
+<view class='stamp'>
+  {
+  <text class='pink'>Coded by</text>:
+  <text class='hexris'>Exris</text>
+  }
+</view>

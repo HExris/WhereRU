@@ -133,6 +133,7 @@ function getOpenID() {
         userInfo: app.globalData.userInfo,
       },
       success: res => {
+        wx.setStorageSync('openID', res.data.data)
         resolve(res)
       },
       fail: err => {

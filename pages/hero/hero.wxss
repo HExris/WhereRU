@@ -1,0 +1,164 @@
+/* pages/hero/hero.wxss */
+
+page {
+  background-color: #d0cebf;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hello {
+  font-size: 60rpx;
+  color: #fff;
+  margin-top: 8vh;
+  line-height: 1;
+  animation-duration: 0.5s;
+}
+
+image {
+  margin-top: 10vh;
+  width: 50vw;
+  animation-duration: 1s;
+}
+
+.stamp {
+  font-weight: bold;
+  position: fixed;
+  right: 40rpx;
+  bottom: 40rpx;
+  color: #bbb;
+}
+
+.pink {
+  color: #ec5c61;
+}
+
+.hexris {
+  color: #28a4bd;
+}
+
+/* loading */
+
+.loading {
+  position: fixed;
+  bottom: 15vh;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  color: #fff;
+}
+
+.loading .loading_box > view {
+  height: 16rpx;
+  width: 16rpx;
+  background: #fff;
+  display: inline-block;
+  margin: 24rpx 8rpx;
+  border-radius: 100%;
+  animation: loader 4s infinite;
+  animation-timing-function: cubic-bezier(0.030, 0.615, 0.995, 0.415);
+  animation-fill-mode: both;
+}
+
+view.l-1 {
+  animation-delay: 1s!important;
+}
+
+view.l-2 {
+  animation-delay: 0.8s!important;
+}
+
+view.l-3 {
+  animation-delay: 0.6s!important;
+}
+
+view.l-4 {
+  animation-delay: 0.4s!important;
+}
+
+view.l-5 {
+  animation-delay: 0.2s!important;
+}
+
+view.l-6 {
+  animation-delay: 0!important;
+}
+
+/* animation */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.fadeIn {
+  -webkit-animation-name: fadeIn;
+  animation-name: fadeIn;
+}
+
+@keyframes zoomInUp {
+  from {
+    opacity: 0;
+    -webkit-transform: scale3d(0.1, 0.1, 0.1) translate3d(0, 1000px, 0);
+    transform: scale3d(0.1, 0.1, 0.1) translate3d(0, 1000px, 0);
+    -webkit-animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+    animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  }
+
+  60% {
+    opacity: 1;
+    -webkit-transform: scale3d(0.475, 0.475, 0.475) translate3d(0, -60px, 0);
+    transform: scale3d(0.475, 0.475, 0.475) translate3d(0, -60px, 0);
+    -webkit-animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);
+    animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);
+  }
+}
+
+.zoomInUp {
+  -webkit-animation-name: zoomInUp;
+  animation-name: zoomInUp;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+
+.fadeInDown {
+  -webkit-animation-name: fadeInDown;
+  animation-name: fadeInDown;
+}
+
+@keyframes loader {
+  0% {
+    transform: translateX(-30px);
+    opacity: 0;
+  }
+
+  25% {
+    opacity: 1;
+  }
+
+  50% {
+    transform: translateX(30px);
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}

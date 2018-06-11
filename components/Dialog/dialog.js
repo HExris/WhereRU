@@ -1,6 +1,7 @@
 // components/Dialog/dialog.js
 const app = getApp()
 const core = require('../../utils/core.js')
+const utils = require('../../utils/utils.js')
 const { hostname, baseUrl } = require('../../utils/config.js')
 
 Component({
@@ -78,22 +79,26 @@ Component({
       this.triggerEvent("confirmEvent");
     },
     getUserInfo(e) {
+      wx.showLoading({
+        title: 'Loading..',
+        mask: true,
+      })
       if (e.detail.userInfo){
         app.globalData.userInfo = e.detail.userInfo
-        wx.setStorageSync('userInfo', e.detail.userInfo)
-        wx.request({
-          method: 'post',
-          url: baseUrl.login ,
-          data:{
-            code: app.globalData.code,
-            userInfo: app.globalData.userInfo,
-          },
-          success: res => {
-            console.log()
-          }
+        wx.setStorage({
+          key: 'userInfo',
+          data: 'e.detail.userInfo',
         })
-        core.triggerFunction('pages/index/index', 'showToast', 'Success')
+        wx.setStorage({
+          key: 'isLogin',
+          data: true,
+        })
+        utils.getOpenID().then(()=>{
+          wx.hideLoading()
+          core.triggerFunction('pages/index/index', 'showToast', 'Success')
+        })
       }else{
+        wx.hideLoading()
         core.triggerFunction('pages/index/index', 'showToast', 'Reject userinfo')
       }
     },

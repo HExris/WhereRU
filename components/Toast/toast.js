@@ -54,7 +54,6 @@ Component({
    */
   methods: {
     triggerToast(callback, duration = 3500) {
-      console.log(this.data)
       this.setData({
         isShow: true
       })

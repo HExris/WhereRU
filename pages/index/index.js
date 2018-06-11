@@ -16,20 +16,25 @@ Page({
     emojiColor: '#fff'
   },
   onLoad: function () {
-    this.initPage()
-  },
-  onShow: function () {
     // 获取本地登录态
     if (wx.getStorageSync('isLogin')) {
       try {
         wx.redirectTo({
           url: '/pages/map/map',
+          success: () => {
+            this.initPage()
+          }
         })
       } catch (err) {
         console.log('fail redirect')
         console.log(err)
       }
+    }else{
+      this.initPage()
     }
+  },
+  onShow: function () {
+    
   },
   initPage() {
     if (app.globalData.userInfo) {
@@ -44,7 +49,7 @@ Page({
           userInfo: res.userInfo,
           hasUserInfo: true
         })
-        wx.setStorageSync('userInfo', userInfo)
+        wx.setStorageSync('userInfo', res.userInfo)
         // 跳转Map页面
         this.doOptions(res)
         utils.getOpenID()
