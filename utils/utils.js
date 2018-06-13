@@ -1,5 +1,5 @@
 const { baseUrl } = require('../utils/config.js')
-const app = new getApp()
+
 /**
  * 格式化时间
  * @date date对象
@@ -125,15 +125,17 @@ function getNetworkStatus() {
 */
 function getOpenID() {
   return new Promise((resolve, reject) => {
+    const app = new getApp(),
+      { code, userInfo } = app.globalData
     wx.request({
       method: 'post',
       url: baseUrl.login,
-      data: {
-        code: app.globalData.code,
-        userInfo: app.globalData.userInfo,
-      },
+      data: { code, userInfo },
       success: res => {
-        wx.setStorageSync('openID', res.data.data)
+        wx.setStorage({
+          key: 'openID',
+          data: res.data.data,
+        })
         resolve(res)
       },
       fail: err => {

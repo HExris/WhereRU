@@ -1,4 +1,6 @@
 // pages/hero/hero.js
+var utils = require('../../utils/utils.js')
+
 Page({
 
   /**
