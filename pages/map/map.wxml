@@ -1,8 +1,6 @@
 <!--pages/map/map.wxml-->
 <map class='map'
 show-location
-latitude="{{latitude}}"
-longitude="{{longitude}}"
 bindupdated='updated'
 scale='{{scale}}'
 id="myMap">

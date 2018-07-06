@@ -72,20 +72,22 @@ Page({
   onShareAppMessage: function () {
 
   },
-  getLocation() {
+  getLocation(cb) {
     wx.getLocation({
       type: 'gcj02',
       success: res => {
         let latitude = res.latitude
         let longitude = res.longitude
-        // this.setData({
-        //   latitude,
-        //   longitude
-        // })
+        this.setData({
+          latitude,
+          longitude
+        })
         this.mapCtx.moveToLocation()
+        console.log(1)
         this.updateLocation(res.latitude, res.longitude)
         this.updated(() => {
           this.showToast('success')
+          typeof cb === 'function' && cb()
         })
       },
       fail: res => {
@@ -109,7 +111,7 @@ Page({
                 if (res.confirm) {
                   wx.openSetting({
                     complete: res => {
-                      this.getLocation()
+                      this.getLocation(cb)
                     }
                   })
                 }
@@ -124,14 +126,14 @@ Page({
   },
   showAction() {
     wx.showActionSheet({
-      itemList: ['小奶狗的定位', '更新我的定位'],
+      itemList: ['小奶狗的位置', '更新我的定位'],
       success: res => {
         switch (res.tapIndex) {
           case 0:
-
+          
             break;
           case 1:
-            this.getLocation()
+            this.getLocation(this.updateLocation(this.data.latitude, this.data.longitude))
             break;
         }
       }
