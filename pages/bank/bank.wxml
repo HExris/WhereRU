@@ -1,0 +1,3 @@
+<!--pages/bank/bank.wxml-->
+<image src="{{userInfo.avatarUrl}}" mode="aspectFit" class="avatar"></image>
+<text>Welcome {{userInfo.nickName}}</text>

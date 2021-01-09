@@ -87,7 +87,7 @@ Component({
         app.globalData.userInfo = e.detail.userInfo
         wx.setStorage({
           key: 'userInfo',
-          data: 'e.detail.userInfo',
+          data: e.detail.userInfo,
         })
         wx.setStorage({
           key: 'isLogin',

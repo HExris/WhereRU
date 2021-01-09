@@ -10,15 +10,27 @@ page {
 .hello {
   font-size: 60rpx;
   color: #fff;
-  margin-top: 8vh;
+  position: fixed;
+  bottom: 25vh;
   line-height: 1;
   animation-duration: 0.5s;
 }
-
-image {
-  margin-top: 10vh;
-  width: 50vw;
+.logo{
+  position: fixed;
+  top: 35vh;
+  left: 50%;
+  transform: translateX(-45%);
+  width: 60vw;
+  height: 50vw;
   animation-duration: 1s;
+}
+
+.bg{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
 }
 
 .stamp {

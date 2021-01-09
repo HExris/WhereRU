@@ -97,7 +97,8 @@ Page({
               title: '无网络',
               content: '请打开数据或连接WiFi',
               confirmColor: '#fbab70',
-              showCancel: false
+              cancelText: 'Cancel',
+              showCancel: true
             })
           }else{
             wx.showModal({
@@ -105,8 +106,8 @@ Page({
               content: 'Please open the location service.',
               confirmText: 'Settings',
               confirmColor: '#fbab70',
-              cancelText: '取消',
-              showCancel: false,
+              cancelText: 'Cancel',
+              showCancel: true,
               success: res => {
                 if (res.confirm) {
                   wx.openSetting({

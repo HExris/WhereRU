@@ -1,5 +1,7 @@
 <!--pages/hero/hero.wxml-->
-<image class='fadeIn' src='/resources/img/hero.jpg' mode='widthFix'></image>
+<cover-image class="bg" mode="scaleFixed" src="/resources/img/bg.png"></cover-image>
+
+<cover-image class='fadeIn logo' src='/resources/img/hero.png' mode='widthFix'></cover-image>
 
 <view class='hello fadeInDown'>Hi ~ (=・ω・=)</view>
 
@@ -16,7 +18,7 @@
 
 <view class='stamp'>
   {
-  <text class='pink'>Coded by</text>:
+  <text class='pink'>Coded by </text>
   <text class='hexris'>Exris</text>
   }
 </view>

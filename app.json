@@ -2,13 +2,15 @@
   "pages": [
     "pages/hero/hero",
     "pages/index/index",
-    "pages/map/map"
+    "pages/map/map",
+    "pages/bank/bank"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#777777",
-    "navigationBarTitleText": "WhereRU",
+    "navigationBarTitleText": "PPPPPPIGGY",
     "navigationBarTextStyle": "white",
     "backgroundColor": "#777777"
-  }
+  },
+  "sitemapLocation": "sitemap.json"
 }

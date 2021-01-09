@@ -19,7 +19,7 @@ Page({
     if (wx.getStorageSync('isLogin')) {
       try {
         wx.redirectTo({
-          url: '/pages/map/map',
+          url: '/pages/bank/bank',
           success: () => {
             this.initPage()
           }
@@ -110,7 +110,7 @@ Page({
       })
       setTimeout(() => {
         wx.redirectTo({
-          url: '../map/map'
+          url: '../bank/bank'
         })
       }, 1500)
     } else {

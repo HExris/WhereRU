@@ -1,5 +1,5 @@
 /** 
- * Description: Core function of this miniprogram
+ * escription: Core function
  * Author: HExris
  * Time: 2018-05-22 20:09:44
 */

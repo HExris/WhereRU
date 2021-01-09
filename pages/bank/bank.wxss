@@ -1,0 +1,12 @@
+/* pages/bank/bank.wxss */
+page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.avatar {
+  display: block;
+  width: 200rpx;
+  height: 200rpx;
+}

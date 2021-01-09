@@ -127,14 +127,17 @@ function getOpenID() {
   return new Promise((resolve, reject) => {
     const app = new getApp(),
       { code, userInfo } = app.globalData
+    const appid = 'wx1613398a07e49699'
+    const secret = '226308cf729f82d460bea2c0c093001a'
+
     wx.request({
-      method: 'post',
-      url: baseUrl.login,
+      method: 'get',
+      url: `https://api.weixin.qq.com/sns/jscode2session?appid=${appid}&secret=${secret}&js_code=${code}&grant_type=authorization_code`,
       data: { code, userInfo },
       success: res => {
         wx.setStorage({
           key: 'openID',
-          data: res.data.data,
+          data: res.data.openid
         })
         resolve(res)
       },
