@@ -158,7 +158,7 @@ Page({
       count: this.data.checkedList.length + 1
     }))
     this.updateDashborad()
-    this.updateDisabledDate()
+    // this.updateDisabledDate()
     wx.hideLoading()
   },
 
@@ -171,7 +171,7 @@ Page({
     // 跳转到当前日期
     calendarInstance.jump({year:new Date().getFullYear(), month: new Date().getMonth() + 1, date: new Date().getDate()});
     // 设置禁用日期
-    this.updateDisabledDate()
+    // this.updateDisabledDate()
   },
 
   /**
