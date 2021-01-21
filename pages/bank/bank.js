@@ -20,7 +20,7 @@ Page({
       hideYearSwitch: true, // 隐藏年份切换
     },
     checkedList: [],
-    currentDate: dayjs().format("YYYY-MM-DD")
+    currentDate: dayjs().format("YYYY/MM/DD")
   },
 
   /**
@@ -53,9 +53,13 @@ Page({
     let currentDay = date || dayjs().format('YYYY/MM/DD')
     console.log(this.data.checkedList, currentDay)
     if (this.data.checkedList.findIndex(checkedDate => currentDay === checkedDate.date) > -1) {
-      this.setData({ checked: true })
+      this.setData({
+        checked: true
+      })
     } else {
-      this.setData({ checked: false })
+      this.setData({
+        checked: false
+      })
     }
   },
   // 获取用户信息
@@ -126,7 +130,9 @@ Page({
         date
       } = e.detail
       let currentDate = `${year}/${month < 10? '0' + month: month}/${date < 10? '0' + date: date}`
-      this.setData({ currentDate })
+      this.setData({
+        currentDate
+      })
       this.getCurrentDayCheckStatus(currentDate)
     }
     console.log('afterTapDate', e.detail) // => { year: 2019, month: 12, date: 3, ...}
@@ -136,11 +142,15 @@ Page({
     this.setData({
       checked: true
     })
+    wx.showLoading({
+      mask: true
+    })
     this.updateCheckedList(this.data.checkedList.concat({
       date: this.data.currentDate,
       count: this.data.checkedList.length + 1
     }))
     this.updateDashborad()
+    wx.hideLoading()
   },
 
   /**
