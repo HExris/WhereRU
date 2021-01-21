@@ -96,7 +96,7 @@ Page({
   showToast(attr) {
     if (attr === 'Reject userinfo') {
       this.setData({
-        toastMessage: `You don't have options . `,
+        toastMessage: `You have no choice . `,
         toastTextColor: '#fff',
         emoji: 'icon-smile',
         emojiColor: '#fffff'

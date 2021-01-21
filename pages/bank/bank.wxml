@@ -1,3 +1,53 @@
 <!--pages/bank/bank.wxml-->
-<image src="{{userInfo.avatarUrl}}" mode="aspectFit" class="avatar"></image>
-<text>Welcome {{userInfo.nickName}}</text>
+<page-meta>
+  <navigation-bar background-color="{{nbBackgroundColor}}" color-animation-duration="500"
+    color-animation-timing-func="easeIn" />
+  <view class="header">
+    <div class="header-bottom"></div>
+    <view class="user-card">
+      <!-- 用户头像 -->
+      <image class="avatar" src="{{userInfo.avatarUrl}}" mode="aspectFit"></image>
+      <!-- 用户名称 -->
+      <view class="username">{{userInfo.nickName}}</view>
+      <!-- 打卡按钮 -->
+      <view class="check-btn" hover-class="active">
+        <view wx:if="{{checked}}">
+          已打卡
+        </view>
+        <view wx:if="{{!checked}}" bindtap="check">
+          <cover-image class="check-icon" src="../../resources/img/check.png"></cover-image>打卡
+        </view>
+      </view>
+    </view>
+    <view class="dashborad">
+      <view class="dashborad-item">
+        <view class="number">
+          {{keepDays}}
+        </view>
+        <view class="dashborad-title">
+          已连续打卡
+        </view>
+      </view>
+      <view class="dashborad-item">
+        <view class="number">
+          {{totalDays}}
+        </view>
+        <view class="dashborad-title">
+          已完成天数
+        </view>
+      </view>
+      <view class="dashborad-item">
+        <view class="number">
+          ￥{{totalAssets}}
+        </view>
+        <view class="dashborad-title">
+          猪猪金额
+        </view>
+      </view>
+    </view>
+    <view class="more">更多功能正在开发中... <text class="iconfont icon-right"></text></view>
+  </view>
+
+  <!-- 日历 -->
+  <Calendar id="calendar" calendarConfig="{{calendarConfig}}" bind:afterTapDate="afterTapDate" />
+</page-meta>

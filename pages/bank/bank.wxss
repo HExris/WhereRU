@@ -1,12 +1,108 @@
 /* pages/bank/bank.wxss */
-page {
+@import '../../components/Calendar/theme/iconfont.wxss';
+
+/* page {} */
+
+.header {
+  position: relative;
+  top: 0;
+  background-color: #f9db61;
+  padding-bottom: 48rpx;
+  border-radius: 40% / 10%;
+  margin-bottom: 50rpx;
+}
+
+.user-card {
+  position: relative;
+  background-color: #f9db61;
+  display: flex;
+  align-items: center;
+  padding: 20rpx 48rpx 20rpx;
+  box-sizing: border-box;
+}
+
+.check-btn {
+  position: absolute;
+  top: 50%;
+  right: 48rpx;
+  transform: translateY(-50%);
+  border-radius: 50rpx;
+  background-color: #fff;
+  padding: 12rpx 18rpx;
+  font-size: 23rpx;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, .15);
+  transition: all 0.1s ease;
+}
+
+.check-btn > view {
+  display: flex;
+  align-items: center;
+}
+
+.check-btn.active > view .check-icon{
+  width: 28rpx;
+}
+
+.check-btn>view .check-icon {
+  margin-right: 10rpx;
+  width: 26rpx;
+  height: auto;
+}
+
+.avatar {
+  display: block;
+  width: 105rpx;
+  height: 105rpx;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 4rpx solid white;
+  margin-right: 20rpx;
+}
+
+.username {
+  font-weight: 500;
+  font-size: 32rpx;
+}
+
+.dashborad {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 26rpx 48rpx;
+  box-sizing: border-box;
+}
+
+.dashborad-item {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.avatar {
-  display: block;
-  width: 200rpx;
-  height: 200rpx;
+.dashborad-title {
+  font-size: 20rpx;
+  color: #524c37;
+}
+
+.dashborad-item .number {
+  font-size: 32rpx;
+  font-weight: bold;
+  color: #282931;
+}
+
+.more{
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  transform: translateY(50%) translateX(-50%);
+  background-color: #fff;
+  padding: 15rpx 30rpx;
+  font-size: 26rpx;
+  color: #777;
+  border-radius: 8px;
+  box-shadow: 0 3px 8px rgba(0,0,0,.1);
+}
+
+.more .iconfont{
+  font-size: 26rpx;
 }

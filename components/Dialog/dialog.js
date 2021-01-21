@@ -93,10 +93,13 @@ Component({
           key: 'isLogin',
           data: true,
         })
-        utils.getOpenID().then(()=>{
-          wx.hideLoading()
-          core.triggerFunction('pages/index/index', 'showToast', 'Success')
-        })
+
+        wx.hideLoading()
+        // 打开dialog
+        core.triggerFunction('pages/index/index', 'showToast', 'Success')
+        // utils.getOpenID().then(()=>{
+          
+        // })
       }else{
         wx.hideLoading()
         core.triggerFunction('pages/index/index', 'showToast', 'Reject userinfo')
