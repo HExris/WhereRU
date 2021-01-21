@@ -1,9 +1,23 @@
+// 引入插件安装器
 import plugins from './plugins/index'
 import { calcJumpData } from './core'
 import { renderCalendar } from './render'
 import { calcTargetYMInfo } from './helper'
 import { dateUtil, calendarGesture, logger } from './utils/index'
 
+// 设置代办
+import todo from './plugins/todo'
+// 禁用/启用可选状态
+import selectable from './plugins/selectable'
+// 农历相关功能
+import solarLunar from './plugins/solarLunar/index'
+
+// 开始安装，支持链式调用
+
+plugins
+  .use(todo)
+  .use(solarLunar)
+  .use(selectable)
 Component({
   options: {
     styleIsolation: 'apply-shared',

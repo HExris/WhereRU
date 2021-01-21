@@ -15,7 +15,7 @@
           已打卡
         </view>
         <view wx:if="{{!checked}}" bindtap="check">
-          <cover-image class="check-icon" src="../../resources/img/check.png"></cover-image>打卡
+          <cover-image class="check-icon" src="../../resources/img/check.png"></cover-image>{{today === currentDate? '打卡': '补签'}}
         </view>
       </view>
     </view>
@@ -49,5 +49,12 @@
   </view>
 
   <!-- 日历 -->
-  <Calendar id="calendar" calendarConfig="{{calendarConfig}}" bind:afterTapDate="afterTapDate" />
+  <Calendar id="calendar" config="{{calendarConfig}}" bind:afterTapDate="afterTapDate" />
+
+  <!-- 打卡记录 -->
+  <!-- <view>打卡记录</view>
+  <view wx:for="{{checkedList}}" wx:for-index="index" wx:for-item="item">
+    {{item.date}}
+    {{item.count}}
+  </view> -->
 </page-meta>

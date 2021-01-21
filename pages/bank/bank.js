@@ -15,12 +15,15 @@ Page({
     totalDays: 0,
     totalAssets: '0.00',
     checked: false,
+    today: dayjs().format('YYYY/MM/DD'),
     calendarConfig: {
-      takeoverTap: true,
+      autoChoosedWhenJump: true,
+      defaultDate: dayjs().format('YYYY-M-D'),
+      markToday: '今',
       hideYearSwitch: true, // 隐藏年份切换
     },
     checkedList: [],
-    currentDate: dayjs().format("YYYY/MM/DD")
+    currentDate: dayjs().format("YYYY/MM/DD"), // 当前选中日期
   },
 
   /**
@@ -109,6 +112,11 @@ Page({
       totalDays: this.data.checkedList.length
     })
   },
+  updateDisabledDate(){
+    // console.log(this.data.checkedList.map(v => v.date.replace(/\//g,'-')))
+    calendarInstance.disableDates(["2021-1-21", "2021-1-22", "2021-1-20", "2021-1-13", "2021-1-19"])
+    // calendarInstance.disableDates(this.data.checkedList.map(v => v.date.replace(/\//g,'-')))
+  },
   /**
    * 更新打卡记录
    * @params { Array } checkedList
@@ -150,6 +158,7 @@ Page({
       count: this.data.checkedList.length + 1
     }))
     this.updateDashborad()
+    this.updateDisabledDate()
     wx.hideLoading()
   },
 
@@ -159,7 +168,10 @@ Page({
   onReady: function () {
     // 初始化组件实例
     calendarInstance = this.selectComponent('#calendar').calendar
-    console.log(calendarInstance)
+    // 跳转到当前日期
+    calendarInstance.jump({year:new Date().getFullYear(), month: new Date().getMonth() + 1, date: new Date().getDate()});
+    // 设置禁用日期
+    this.updateDisabledDate()
   },
 
   /**
