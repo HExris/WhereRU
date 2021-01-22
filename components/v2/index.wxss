@@ -131,7 +131,7 @@
 .date-desc {
     width: 150%;
     height: 32rpx;
-    font-size: 20rpx;
+    font-size: 18rpx;
     line-height: 32rpx;
     position: absolute;
     left: 50%;

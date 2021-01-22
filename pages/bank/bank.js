@@ -8,8 +8,8 @@ Page({
    * 页面的初始数据
    */
   data: {
+    // 用户信息
     userInfo: {},
-    nbFrontColor: '#000000',
     nbBackgroundColor: '#777777',
     keepDays: 0,
     totalDays: 0,
@@ -17,14 +17,16 @@ Page({
     checked: false,
     today: dayjs().format('YYYY/MM/DD'),
     calendarConfig: {
-      autoChoosedWhenJump: true,
-      defaultDate: dayjs().format('YYYY-M-D'),
+      // autoChoosedWhenJump: true,
+      // defaultDate: dayjs().format('YYYY-M-D'),
       markToday: '今',
       hideYearSwitch: true, // 隐藏年份切换
     },
     checkedList: [],
     currentDate: dayjs().format("YYYY/MM/DD"), // 当前选中日期
-    checkText: ''
+    checkText: '',
+    firstDay: '', // 第一天
+    showGuideFlag: false
   },
 
   /**
@@ -38,16 +40,61 @@ Page({
     // 获取用户信息
     this.getUserInfoWitoutCredentials()
     // 修改导航栏颜色
-    this.setData({
-      nbFrontColor: '#222222',
-      nbBackgroundColor: '#f9db61',
+    wx.setNavigationBarColor({
+      frontColor: '#000000',
+      backgroundColor: '#f9db61',
+      animation: {
+        duration: 400,
+        timingFunc: 'ease'
+      }
     })
     // 获取用户打卡记录
     this.getUserCheckLog()
     // 获取当日打卡记录
     this.getCurrentDayCheckStatus()
+    // 获取开始日期
+    this.getFirstDay()
     // 更新看板信息
     this.updateDashborad()
+    // 显示用户引导弹窗
+    this.showGuideToast()
+  },
+  // 获取开始日期
+  getFirstDay() {
+    let firstDay = wx.getStorageSync('firstDay') || null
+    this.setData({
+      firstDay
+    })
+  },
+  // 关闭引导弹窗
+  closeToast() {
+    this.setData({
+      showGuideFlag: false
+    })
+    wx.setNavigationBarColor({
+      frontColor: '#000000',
+      backgroundColor: '#f9db61',
+      animation: {
+        duration: 200,
+        timingFunc: 'ease'
+      }
+    })
+  },
+  showGuideToast() {
+    wx.setNavigationBarColor({
+      frontColor: '#000000',
+      backgroundColor: '#C7AF4E'
+    })
+    // 未选择开始日期时
+    if (!this.data.firstDay) {
+      this.setData({
+        showGuideFlag: true
+      })
+      // this.showGuideFlag = true
+      // this.setData({
+      //   firstDay: dayjs().format("YYYY/MM/DD")
+      // })
+    }
   },
   /**
    * 获取当前选择日期的打卡状态
@@ -56,7 +103,9 @@ Page({
   getCurrentDayCheckStatus(date) {
     let currentDay = date || dayjs().format('YYYY/MM/DD')
     let checkText
-    if (new Date(this.data.today) <= new Date(this.data.currentDate)) {
+    if (!this.data.firstDay) {
+      checkText = '打卡'
+    } else if (new Date(this.data.today) <= new Date(this.data.currentDate)) {
       checkText = '打卡'
     } else {
       checkText = '补签'
@@ -121,6 +170,20 @@ Page({
     // 已打卡日期
     const checkedList = this.data.checkedList.map(v => dayjs(v.date).format('YYYY-M-D'))
     calendarInstance.disableDates(checkedList)
+    // 设置打卡所需金额
+    calendarInstance.setTodos({
+      pos: 'bottom', // 待办点标记位置 ['top', 'bottom']
+      dotColor: 'purple', // 待办点标记颜色
+      // circle: true, // 待办圆圈标记设置（如圆圈标记已签到日期），该设置与点标记设置互斥
+      showLabelAlways: true, // 点击时是否显示待办事项（圆点/文字），在 circle 为 true 及当日历配置 showLunar 为 true 时，此配置失效
+      dates: [{
+        year: 2021,
+        month: 1,
+        date: 24,
+        todoText: '待办',
+        color: '#ff4400bf' // 单独定义代办颜色 (标记点、文字)
+      }]
+    })
   },
   /**
    * 更新打卡记录
@@ -149,12 +212,41 @@ Page({
       this.getCurrentDayCheckStatus(currentDate)
     }
   },
+  // 刷新开始日期
+  updateStartDate() {
+    wx.setStorage({
+      data: this.data.currentDate,
+      key: 'firstDay',
+    })
+    this.setData({
+      firstDay: this.data.currentDate
+    })
+    app.globalData.firstDay = this.data.currentDate
+  },
   // 打卡
+  checkInterceptor() {
+    if (this.data.checked) return false
+    if (!this.data.firstDay) {
+      wx.showModal({
+        title: '提示',
+        content: `确定要从${this.data.currentDate === this.data.today ? '今天':this.data.currentDate}开始打卡吗？`,
+        success: action => {
+          if (action.confirm) {
+
+            this.check()
+          }
+        }
+      })
+    } else {
+      this.check()
+    }
+  },
   check() {
     this.setData({
       checked: true
     })
     wx.showLoading({
+      title: 'Loading...',
       mask: true
     })
     this.updateCheckedList(this.data.checkedList.concat({
@@ -164,6 +256,16 @@ Page({
     this.updateDashborad()
     this.updateDisabledDate()
     wx.hideLoading()
+    wx.vibrateShort({
+      type: 'heavy'
+    })
+  },
+  /**
+   * 当改变月份时触发
+   * => current 当前年月 / next 切换后的年月
+   */
+  whenChangeMonth(e) {
+    console.log('whenChangeMonth', e.detail)
   },
 
   /**
@@ -173,11 +275,11 @@ Page({
     // 初始化组件实例
     calendarInstance = this.selectComponent('#calendar').calendar
     // 跳转到当前日期
-    calendarInstance.jump({
-      year: new Date().getFullYear(),
-      month: new Date().getMonth() + 1,
-      date: new Date().getDate()
-    });
+    // calendarInstance.jump({
+    //   year: new Date().getFullYear(),
+    //   month: new Date().getMonth() + 1,
+    //   date: new Date().getDate()
+    // });
     // 设置禁用日期
     this.updateDisabledDate()
   },

@@ -1,5 +1,5 @@
 /* pages/bank/bank.wxss */
-@import '../../components/Calendar/theme/iconfont.wxss';
+@import '../../components/v2/theme/iconfont.wxss';
 
 /* page {} */
 
@@ -32,14 +32,20 @@
   font-size: 23rpx;
   box-shadow: 0 3px 8px rgba(0, 0, 0, .15);
   transition: all 0.1s ease;
+  line-height: 1.4;
+  overflow: hidden;
 }
 
-.check-btn > view {
+.check-btn:active {
+  transform: translateY(-50%) scale(1.05);
+}
+
+.check-btn>view {
   display: flex;
   align-items: center;
 }
 
-.check-btn.active > view .check-icon{
+.check-btn.active>view .check-icon {
   width: 28rpx;
 }
 
@@ -81,6 +87,7 @@
 
 .dashborad-title {
   font-size: 20rpx;
+  font-weight: 500;
   color: #524c37;
 }
 
@@ -90,7 +97,7 @@
   color: #282931;
 }
 
-.more{
+.more {
   position: absolute;
   left: 50%;
   bottom: 0;
@@ -100,7 +107,7 @@
   font-size: 26rpx;
   color: #777;
   border-radius: 8px;
-  box-shadow: 0 3px 8px rgba(0,0,0,.1);
+  box-shadow: 0 3px 8px rgba(0, 0, 0, .1);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -108,6 +115,77 @@
   box-sizing: border-box;
 }
 
-.more .iconfont{
+.more .iconfont {
   font-size: 26rpx;
+}
+
+/* Toast */
+.guide-toast {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+}
+
+.guide-toast-mask {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, .2);
+}
+
+.guide-toast-content {
+  position: absolute;
+  left: 50%;
+  top: 20vh;
+  transform: translateX(-50%);
+  width: 520rpx;
+  border-radius: .6em;
+  overflow: hidden;
+  background-color: #fff;
+}
+
+.guide-toast-content .guide-cover image{
+  width: 520rpx;
+  height: 430rpx;
+}
+.guide-toast-content .close-btn {
+  position: absolute;
+  top: 20rpx;
+  right: 20rpx;
+  background-color: rgba(0, 0, 0, .2);
+  border-radius: 50%;
+  overflow: hidden;
+  width: 55rpx;
+  height: 55rpx;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.guide-toast-content .close-btn .iconfont {
+  display: block;
+  font-size: 26rpx;
+  color: #fff;
+}
+
+.guide-slogan{
+  padding: 20rpx 25rpx;
+  font-size: 24rpx;
+  text-align: center;
+  line-height: 1.6em;
+}
+
+.guide-toast-content .submit {
+  width: 420rpx;
+  margin: 0 auto 25rpx;
+  line-height: 34rpx;
+  padding: 16rpx 0;
+  border-radius: 40rpx;
+  box-sizing: border-box;
+  text-align: center;
+  font-size: 28rpx;
+  background-color: #f9db61;
+  color: #000000;
 }

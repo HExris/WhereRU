@@ -1,7 +1,5 @@
 <!--pages/bank/bank.wxml-->
 <page-meta>
-  <navigation-bar background-color="{{nbBackgroundColor}}" color-animation-duration="500"
-    color-animation-timing-func="easeIn" />
   <view class="header">
     <div class="header-bottom"></div>
     <view class="user-card">
@@ -10,14 +8,14 @@
       <!-- 用户名称 -->
       <view class="username">{{userInfo.nickName}}</view>
       <!-- 打卡按钮 -->
-      <view class="check-btn" hover-class="active">
+      <button class="check-btn" bindtap="checkInterceptor">
         <view wx:if="{{checked}}">
           已打卡
         </view>
-        <view wx:if="{{!checked}}" bindtap="check">
+        <view wx:if="{{!checked}}">
           <cover-image class="check-icon" src="../../resources/img/check.png"></cover-image>{{checkText}}
         </view>
-      </view>
+      </button>
     </view>
     <view class="dashborad">
       <view class="dashborad-item">
@@ -49,8 +47,28 @@
   </view>
 
   <!-- 日历 -->
-  <Calendar id="calendar" config="{{calendarConfig}}" bind:afterTapDate="afterTapDate" />
+  <Calendar
+    bind:whenChangeMonth="whenChangeMonth"
+    id="calendar"
+    config="{{calendarConfig}}"
+    bind:afterTapDate="afterTapDate" />
 
+  <!-- 引导弹窗 -->
+  <view class="guide-toast" wx:if="{{showGuideFlag}}">
+    <view class="guide-toast-mask"></view>
+    <view class="guide-toast-content">
+      <view class="close-btn" bindtap="closeToast">
+        <text class="iconfont icon-Close"></text>
+      </view>
+      <view class="guide-cover">
+        <image mode="aspectFill" src="http://w.wallhaven.cc/full/rd/wallhaven-rd7drw.jpg"></image>
+      </view>
+      <view class="guide-slogan">
+        每天比昨天多存一块钱，一年后你将拥有六万六千七百九十五块钱。
+      </view>
+      <view class="submit">开始使用</view>
+    </view>
+  </view>
   <!-- 打卡记录 -->
   <!-- <view>打卡记录</view>
   <view wx:for="{{checkedList}}" wx:for-index="index" wx:for-item="item">
