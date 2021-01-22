@@ -15,7 +15,7 @@
           已打卡
         </view>
         <view wx:if="{{!checked}}" bindtap="check">
-          <cover-image class="check-icon" src="../../resources/img/check.png"></cover-image>{{today === currentDate? '打卡': '补签'}}
+          <cover-image class="check-icon" src="../../resources/img/check.png"></cover-image>{{checkText}}
         </view>
       </view>
     </view>
@@ -45,7 +45,7 @@
         </view>
       </view>
     </view>
-    <view class="more">更多功能正在开发中... <text class="iconfont icon-right"></text></view>
+    <view class="more"><text>更多功能正在开发中 . . .</text><text class="iconfont icon-right"></text></view>
   </view>
 
   <!-- 日历 -->

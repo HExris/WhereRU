@@ -10,16 +10,16 @@
 
 .default_today {
     color: #fff;
-    background-color: #874fb4;
+    background-color: #874fb4c2;
 }
 
 .default_choosed {
     color: #fff;
-    background-color: #ff629a;
+    background-color: #ff6299c7;
 }
 
 .default_date-disable {
-    color: #9f9f9f;
+    color: #cccccc;
 }
 
 .default_prev-month-date,

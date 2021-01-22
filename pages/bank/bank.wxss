@@ -7,7 +7,7 @@
   position: relative;
   top: 0;
   background-color: #f9db61;
-  padding-bottom: 48rpx;
+  padding-bottom: 28rpx;
   border-radius: 40% / 10%;
   margin-bottom: 50rpx;
 }
@@ -101,6 +101,11 @@
   color: #777;
   border-radius: 8px;
   box-shadow: 0 3px 8px rgba(0,0,0,.1);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 410rpx;
+  box-sizing: border-box;
 }
 
 .more .iconfont{

@@ -24,6 +24,7 @@ Page({
     },
     checkedList: [],
     currentDate: dayjs().format("YYYY/MM/DD"), // 当前选中日期
+    checkText: ''
   },
 
   /**
@@ -54,16 +55,16 @@ Page({
    */
   getCurrentDayCheckStatus(date) {
     let currentDay = date || dayjs().format('YYYY/MM/DD')
-    console.log(this.data.checkedList, currentDay)
-    if (this.data.checkedList.findIndex(checkedDate => currentDay === checkedDate.date) > -1) {
-      this.setData({
-        checked: true
-      })
+    let checkText
+    if (new Date(this.data.today) <= new Date(this.data.currentDate)) {
+      checkText = '打卡'
     } else {
-      this.setData({
-        checked: false
-      })
+      checkText = '补签'
     }
+    this.setData({
+      checked: this.data.checkedList.findIndex(checkedDate => currentDay === checkedDate.date) > -1 ? true : false,
+      checkText
+    })
   },
   // 获取用户信息
   getUserInfoWitoutCredentials() {
@@ -103,6 +104,10 @@ Page({
     }
   },
   updateDashborad() {
+    // 更细连续打卡天数
+    let keepDays = 0
+    this.currentDate
+    // 更细已完成天数
     let totalAssets = 0
     this.data.checkedList.forEach(v => {
       totalAssets += v.count
@@ -112,10 +117,10 @@ Page({
       totalDays: this.data.checkedList.length
     })
   },
-  updateDisabledDate(){
-    // console.log(this.data.checkedList.map(v => v.date.replace(/\//g,'-')))
-    calendarInstance.disableDates(["2021-1-21", "2021-1-22", "2021-1-20", "2021-1-13", "2021-1-19"])
-    // calendarInstance.disableDates(this.data.checkedList.map(v => v.date.replace(/\//g,'-')))
+  updateDisabledDate() {
+    // 已打卡日期
+    const checkedList = this.data.checkedList.map(v => dayjs(v.date).format('YYYY-M-D'))
+    calendarInstance.disableDates(checkedList)
   },
   /**
    * 更新打卡记录
@@ -143,7 +148,6 @@ Page({
       })
       this.getCurrentDayCheckStatus(currentDate)
     }
-    console.log('afterTapDate', e.detail) // => { year: 2019, month: 12, date: 3, ...}
   },
   // 打卡
   check() {
@@ -158,7 +162,7 @@ Page({
       count: this.data.checkedList.length + 1
     }))
     this.updateDashborad()
-    // this.updateDisabledDate()
+    this.updateDisabledDate()
     wx.hideLoading()
   },
 
@@ -169,16 +173,20 @@ Page({
     // 初始化组件实例
     calendarInstance = this.selectComponent('#calendar').calendar
     // 跳转到当前日期
-    calendarInstance.jump({year:new Date().getFullYear(), month: new Date().getMonth() + 1, date: new Date().getDate()});
+    calendarInstance.jump({
+      year: new Date().getFullYear(),
+      month: new Date().getMonth() + 1,
+      date: new Date().getDate()
+    });
     // 设置禁用日期
-    // this.updateDisabledDate()
+    this.updateDisabledDate()
   },
 
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    wx.hideHomeButton()
   },
 
   /**
