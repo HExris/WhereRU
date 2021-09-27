@@ -3,7 +3,7 @@ const app = getApp()
 let calendarInstance
 import dayjs from "../../utils/day";
 Page({
-
+  
   /**
    * 页面的初始数据
    */
@@ -26,7 +26,8 @@ Page({
     currentDate: dayjs().format("YYYY/MM/DD"), // 当前选中日期
     checkText: '',
     firstDay: '', // 第一天
-    showGuideFlag: false
+    showGuideFlag: false,
+    animationClass: ''
   },
 
   /**
@@ -88,7 +89,8 @@ Page({
     // 未选择开始日期时
     if (!this.data.firstDay) {
       this.setData({
-        showGuideFlag: true
+        showGuideFlag: true,
+        animationClass: 'animate__zoomInDown'
       })
       // this.showGuideFlag = true
       // this.setData({

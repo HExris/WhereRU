@@ -56,7 +56,7 @@
   <!-- 引导弹窗 -->
   <view class="guide-toast" wx:if="{{showGuideFlag}}">
     <view class="guide-toast-mask"></view>
-    <view class="guide-toast-content">
+    <view class="guide-toast-content {{animationClass}}">
       <view class="close-btn" bindtap="closeToast">
         <text class="iconfont icon-Close"></text>
       </view>
@@ -69,6 +69,7 @@
       <view class="submit">开始使用</view>
     </view>
   </view>
+
   <!-- 打卡记录 -->
   <!-- <view>打卡记录</view>
   <view wx:for="{{checkedList}}" wx:for-index="index" wx:for-item="item">

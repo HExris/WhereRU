@@ -1,5 +1,6 @@
 /* pages/bank/bank.wxss */
-@import '../../components/v2/theme/iconfont.wxss';
+@import '/components/v2/theme/iconfont.wxss';
+@import '/lib/animatie.wxss';
 
 /* page {} */
 
@@ -137,13 +138,14 @@
 
 .guide-toast-content {
   position: absolute;
-  left: 50%;
+  right: 50%;
   top: 20vh;
-  transform: translateX(-50%);
+  transform: translateX(50%);
   width: 520rpx;
   border-radius: .6em;
   overflow: hidden;
   background-color: #fff;
+  animation-duration: .5s;
 }
 
 .guide-toast-content .guide-cover image{
